@@ -1,31 +1,29 @@
-import React from "react"
-import { URL } from "./constants"
+import React from "react";
+import { URL } from "./constants";
 
 class User extends React.Component {
- state = { data }
+  state = { data: null };
 
- componentDidMount() {
-  this.fetchUser()
- }
-
- componentDidUpdate(prev) {
-  if (this.props.id !== prev.id) {
-   this.fetchUser()
+  componentDidMount() {
+    this.fetchUser();
   }
- }
 
- fetchUser() {
-  fetch(`${URL}/${this.props.id}`)
-   .then(response => response.json())
-   .then(data => this.setState({ data }))
- }
+  componentDidUpdate(prev) {
+    if (this.props.id !== prev.id) {
+      this.fetchUser();
+    }
+  }
 
- // ...
- 
- render() {
-  const { data } = this.state;
-  return data && <div>{data.name}</div>
- }
+  fetchUser() {
+    fetch(`${URL}/${this.props.id}`)
+      .then(response => response.json())
+      .then(data => this.setState({ data }));
+  }
+
+  render() {
+    const { data } = this.state;
+    return data && <div>{data.name}</div>;
+  }
 }
 
-export default Button;
+export default User;

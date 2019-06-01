@@ -1,20 +1,20 @@
-import React, { useState, useState } from "react"
-import { URL } from "./constants"
+import { useState, useEffect } from "react";
+import { URL } from "./constants";
 
 function useFetchUser(id) {
- const [data, setData] = useState()
+  const [data, setData] = useState(null);
 
- useEffect(() => {
-  let canceled = false
+  useEffect(() => {
+    let canceled = false;
 
-  fetch(`${URL}/${id}`)
-   .then(response => response.json())
-   .then(data => !canceled && setData(data))
+    fetch(`${URL}/${id}`)
+      .then(response => response.json())
+      .then(data => !canceled && setData(data));
 
-  return () => canceled = true
- }, [id])
+    return () => (canceled = true);
+  }, [id]);
 
- return data
+  return data;
 }
 
-export default useFetchUser
+export default useFetchUser;
